@@ -6,10 +6,10 @@ const port = 3000;
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 const { mongoConnect, mongoDisconnect } = require('./services/mongo');
-const { getAllCameras } = require('./models/camera.model');
-const { getAllLaptops } = require('./models/laptop.model');
-const {getAllMobiles}=require('./models/mobile.model')
-const { getAllTVs } = require('./models/tv.model');
+const { getAllCameras,getCamerabyBrand,getCamerasByBudget } = require('./models/camera.model');
+const { getAllLaptops,getLaptopbyBrand } = require('./models/laptop.model');
+const {getAllMobiles,getMobilebyBrand}=require('./models/mobile.model')
+const { getAllTVs,getTVbyBrand} = require('./models/tv.model');
 async function startServer() {
   console.log('Starting server...');
   await mongoConnect();
@@ -20,17 +20,21 @@ async function startServer() {
 
   try {
     // console.log('Fetching cameras...');
-    // const cameras = await getAllCameras();
+    // const cameras = await getCamerabyBrand("Canon");
     // console.log('Cameras:', cameras); // Verify the fetched data
 
-    // console.log('Fetching laptops...');
-    // const laptops = await getAllLaptops();
+    //  console.log('Fetching laptops...');
+    // const laptops = await getLaptopbyBrand("Apple");
     // console.log('Laptops:', laptops); // Verify the fetched data
 
-    // 
+     
     console.log('Fetching tvs...');
-    const tvs = await getAllTVs();
+    const tvs = await getCamerasByBudget(100,300);
     console.log('TV:', tvs); // Verify the fetched data
+
+    // console.log("Fetching phones");
+    // const phones=await getMobilebyBrand("LG")
+    // console.log(phones);
   } catch (error) {
     console.error('Error fetching cameras:', error);
   }
