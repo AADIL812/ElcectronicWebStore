@@ -7,7 +7,9 @@ const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 const { mongoConnect, mongoDisconnect } = require('./services/mongo');
 const { getAllCameras } = require('./models/camera.model');
-
+const { getAllLaptops } = require('./models/laptop.model');
+const {getAllMobiles}=require('./models/mobile.model')
+const { getAllTVs } = require('./models/tv.model');
 async function startServer() {
   console.log('Starting server...');
   await mongoConnect();
@@ -17,9 +19,18 @@ async function startServer() {
   });
 
   try {
-    console.log('Fetching cameras...');
-    const cameras = await getAllCameras();
-    console.log('Cameras:', cameras); // Verify the fetched data
+    // console.log('Fetching cameras...');
+    // const cameras = await getAllCameras();
+    // console.log('Cameras:', cameras); // Verify the fetched data
+
+    // console.log('Fetching laptops...');
+    // const laptops = await getAllLaptops();
+    // console.log('Laptops:', laptops); // Verify the fetched data
+
+    // 
+    console.log('Fetching tvs...');
+    const tvs = await getAllTVs();
+    console.log('TV:', tvs); // Verify the fetched data
   } catch (error) {
     console.error('Error fetching cameras:', error);
   }
