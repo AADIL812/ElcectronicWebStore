@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 const { mongoConnect, mongoDisconnect } = require('./services/mongo');
 const { getAllCameras,getCamerabyBrand,getCamerasByBudget } = require('./models/camera.model');
-const { getAllLaptops,getLaptopbyBrand } = require('./models/laptop.model');
+const { getAllLaptops,getLaptopbyBrand ,getLaptopsByBudget} = require('./models/laptop.model');
 const {getAllMobiles,getMobilebyBrand}=require('./models/mobile.model')
 const { getAllTVs,getTVbyBrand} = require('./models/tv.model');
 async function startServer() {
@@ -29,8 +29,8 @@ async function startServer() {
 
      
     console.log('Fetching tvs...');
-    const tvs = await getCamerasByBudget(100,300);
-    console.log('TV:', tvs); // Verify the fetched data
+    const tvs = await getLaptopsByBudget(500,1500);
+    // console.log('TV:', tvs); // Verify the fetched data
 
     // console.log("Fetching phones");
     // const phones=await getMobilebyBrand("LG")

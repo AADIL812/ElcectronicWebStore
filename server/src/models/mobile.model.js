@@ -35,7 +35,7 @@ async function getMobilesByBudget(lowerPrice, upperPrice) {
 
         // Query mobiles where price is between lowerPrice and upperPrice
         const mobiles = await collection.find({
-            price: { $gte: lowerPrice, $lte: upperPrice }
+            'price(USD)': { $gte: lowerPrice, $lte: upperPrice }
         }).toArray();
 
         return mobiles; // Return the fetched mobiles
@@ -46,4 +46,5 @@ async function getMobilesByBudget(lowerPrice, upperPrice) {
         await client.close(); // Ensure the client is closed properly
     }
 }
+
 module.exports={getAllMobiles,getMobilebyBrand,getMobilesByBudget};

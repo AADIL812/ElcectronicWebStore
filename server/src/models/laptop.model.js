@@ -31,9 +31,10 @@ async function getLaptopsByBudget(lowerPrice, upperPrice) {
 
         // Query laptops where price is between lowerPrice and upperPrice
         const laptops = await collection.find({
-            Price: { $gte: lowerPrice, $lte: upperPrice }
+            'Price': { $gte: lowerPrice, $lte: upperPrice }
         }).toArray();
 
+        // Log the prices of the laptops found
         return laptops; // Return the fetched laptops
     } catch (error) {
         console.error('Error fetching laptops by budget:', error);
@@ -42,4 +43,5 @@ async function getLaptopsByBudget(lowerPrice, upperPrice) {
         await client.close(); // Ensure the client is closed properly
     }
 }
+
 module.exports={getAllLaptops,getLaptopbyBrand,getLaptopsByBudget};
