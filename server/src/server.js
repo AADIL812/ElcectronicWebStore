@@ -1,7 +1,7 @@
 const http = require("http");
 const app = require("./app");
 const server = http.createServer(app);
-const port = 3000;
+const port = 5000;
 
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');

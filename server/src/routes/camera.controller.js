@@ -2,11 +2,13 @@ const {getAllCameras,getCamerabyBrand,getCamerasByBudget}=require('../models/cam
 
 async function httpgetAllCameras(req,res)
 {
+    console.log("get all cameras function called");
     const cameras=await getAllCameras();
     return res.status(200).json(cameras);
 }
 
 async function httpgetCamerabyBrand(req, res) {
+    console.log("get cameras by brand function called");
     console.log('Brand param:', req.params.brand);
     console.log('Brand query:', req.query.brand);
 
@@ -42,6 +44,7 @@ async function httpgetCamerabyBrand(req, res) {
 }
 
 async function httpgetCamerasByBudget(req, res) {
+    console.log("get cameras by price function called");
     try {
         // Extract lowerPrice and upperPrice from query parameters
         const lowerPrice = parseFloat(req.query.lowerPrice);
