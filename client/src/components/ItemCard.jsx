@@ -14,8 +14,6 @@ const ItemCard = ({ model, brand, price }) => {
           color: white; /* White text color */
           border-radius: 10px; /* Rounded corners */
           padding: 20px;
-          width: 250px; /* Fixed width for the card */
-          margin: 15px; /* Space between the cards */
           text-align: center; /* Center align the text */
           box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for the card */
           transition: transform 0.3s ease-in-out; /* Smooth animation for hover */
