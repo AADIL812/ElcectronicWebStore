@@ -1,6 +1,6 @@
 import Card from "./Card";
 import Sections from "./Sections";
-
+import {Link} from "react-router-dom";
 const Home = () => {
   return (
     <>

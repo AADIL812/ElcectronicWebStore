@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Signinform from "./Signinform";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
 function Signin() {
   const [show, setShow] = useState(false);
 
@@ -14,7 +13,6 @@ function Signin() {
       <Button variant="dark" onClick={handleShow}>
         Sign In
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Sign In</Modal.Title>

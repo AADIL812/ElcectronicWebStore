@@ -1,7 +1,19 @@
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import React from "react";
-
+import axios from "axios";
+import { useState } from "react";
 const Signupform = () => {
+   const {name,setName}=useState();
+    const {userid,setUserid}=useState();
+    const {email,setEmail}=useState();
+    const {pwd,setpwd}=useState();
+
+    const handleSubmit=(e)=>{
+      e.preventDefault();
+      axios.post("",{name,userid,email,pwd})
+      .then(result=>console.log(result))
+      .catch(err=>console.log(err))
+    }
   return (
     <>
       <form>
@@ -12,6 +24,7 @@ const Signupform = () => {
             className="form-control"
             id="name"
             placeholder="Enter name"
+            onChange={(e)=>setName(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -21,6 +34,7 @@ const Signupform = () => {
             className="form-control"
             id="userid"
             placeholder="Enter userid"
+            onChange={(e)=>setUserid(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -31,6 +45,7 @@ const Signupform = () => {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
+            onChange={(e)=>setEmail(e.target.value)}
           />
           <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
@@ -43,6 +58,7 @@ const Signupform = () => {
             className="form-control"
             id="exampleInputPassword1"
             placeholder="Password"
+            onChange={(e)=>setpwd(e.target.value)}
           />
         </div>
         <div className="form-group form-check">
