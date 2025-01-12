@@ -10,6 +10,7 @@ const { getAllCameras,getCamerabyBrand,getCamerasByBudget } = require('./models/
 const { getAllLaptops,getLaptopbyBrand ,getLaptopsByBudget} = require('./models/laptop.model');
 const {getAllMobiles,getMobilebyBrand}=require('./models/mobile.model')
 const { getAllTVs,getTVbyBrand} = require('./models/tv.model');
+const {addUser}=require('./models/signup.model')
 async function startServer() {
   console.log('Starting server...');
   await mongoConnect();
@@ -17,6 +18,7 @@ async function startServer() {
   mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
   });
+
 
   try {
     // console.log('Fetching cameras...');
@@ -27,14 +29,8 @@ async function startServer() {
     // const laptops = await getLaptopbyBrand("Apple");
     // console.log('Laptops:', laptops); // Verify the fetched data
 
-     
-    console.log('Fetching tvs...');
-    const tvs = await getLaptopsByBudget(500,1500);
-    // console.log('TV:', tvs); // Verify the fetched data
-
-    // console.log("Fetching phones");
-    // const phones=await getMobilebyBrand("LG")
-    // console.log(phones);
+     console.log('Adding user');
+     addUser('Aadil812','Aadil Mohamed','aadilharis812@gmail.com','aadil112233');
   } catch (error) {
     console.error('Error fetching cameras:', error);
   }
