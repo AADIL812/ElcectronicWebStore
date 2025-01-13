@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { userContext } from "../Userprovider"; // Import the context
 
 const Signinform = () => {
   const [userid, setUserid] = useState("");
   const [password, setPassword] = useState("");
+
+  // Consume userContext
+  const { user, setUser } = useContext(userContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +19,8 @@ const Signinform = () => {
       });
 
       if (response.status === 200) {
-        // Redirect or show success message
+        console.log(response);
+        setUser({ userid:response.data.user.UserId,username:response.data.user.Name});
         alert("Login successful!");
       }
     } catch (error) {

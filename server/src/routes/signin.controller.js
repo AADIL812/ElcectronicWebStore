@@ -7,6 +7,7 @@ async function loginUser(req, res) {
   try {
     const user = await authenticateUser(userid, password);
     res.status(200).json({ message: 'Login successful', user });
+    return user;
   } catch (error) {
     if (error.message === 'User not found') {
       res.status(404).json({ message: "Userid doesn't exist." });

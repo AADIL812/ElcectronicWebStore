@@ -10,25 +10,28 @@ import TV from "./components/TV.jsx";
 import Signin from "./components/Signin.jsx";
 import Signup from "./components/Signup.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Userprovider from "./Userprovider.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App />, // App will act as a layout with Outlet
     children: [
       { path: "/", element: <Home /> },
-      { path: "/Laptop", element: <Laptop /> },
-      { path: "/Mobile", element: <Mobile /> },
-      { path: "/Camera", element: <Camera /> },
-      { path: "/TV", element: <TV /> },
-      { path: "/signin", element: <Signin /> }, // Route for Signin
-      { path: "/signup", element: <Signup /> }, // Route for Signup
+      { path: "/laptop", element: <Laptop /> },
+      { path: "/mobile", element: <Mobile /> },
+      { path: "/camera", element: <Camera /> },
+      { path: "/tv", element: <TV /> },
+      { path: "/signin", element: <Signin /> },
+      { path: "/signup", element: <Signup /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Userprovider>
+      <RouterProvider router={router} />
+    </Userprovider>
   </React.StrictMode>
 );

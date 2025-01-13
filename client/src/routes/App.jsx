@@ -1,35 +1,38 @@
 import "./App.css";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
-import Home from "../components/Home";
-import "bootstrap/dist/css/bootstrap.min.css";
-//import { RouterProvider, createBrowserRouter } from "react-router-dom";
-//import { ChakraProvider } from "@chakra-ui/react";
-import { useState } from "react";
-//import { BrowserRouter } from "react-router-dom";
-//import Signin from "./components/Signin";
-import Mobile from "../components/Mobile";
-import Laptop from "../components/Laptop";
-import Camera from "../components/Camera";
-import TV from "../components/TV";
+import { useContext } from "react";
 import { Outlet } from "react-router-dom";
+import { userContext } from "../Userprovider"; // Import userContext
+
 function App() {
-  let [comp, setComp] = useState("home");
+  const { user } = useContext(userContext); // Access user details from context
+
   return (
-    <>
-      <div className="grp1">
-        <div className="grp2">
-          <Sidebar comp={comp} setcomp={setComp} />
-          <Footer />
-        </div>
-        <Outlet></Outlet>
-        {/* {comp === "home" && <Home />}
-        {comp === "laptop" && <Laptop />}
-        {comp === "camera" && <Camera />}
-        {comp === "mobile" && <Mobile />}
-        {comp === "tv" && <TV />} */}
+    <div className="grp1">
+      {/* User Details in the Top-Right Corner */}
+      <div style={{ position: "absolute", top: "10px", right: "10px", textAlign: "right" }}>
+        {user ? ( 
+          <div>
+            {console.log(user)}
+            <p>
+              Welcome, <strong>{user.username}</strong>!
+              {console.log(user.name)}
+            </p>
+            <p>UserID: {user.userid}</p>
+          </div>
+        ) : (
+          <p>You are not logged in.</p>
+        )}
       </div>
-    </>
+
+      <div className="grp2">
+        <Sidebar />
+        <Footer />
+      </div>
+      {/* Render Child Routes */}
+      <Outlet />
+    </div>
   );
 }
 
