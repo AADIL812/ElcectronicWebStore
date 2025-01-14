@@ -10,14 +10,15 @@ const { getAllCameras,getCamerabyBrand,getCamerasByBudget } = require('./models/
 const { getAllLaptops,getLaptopbyBrand ,getLaptopsByBudget} = require('./models/laptop.model');
 const {getAllMobiles,getMobilebyBrand}=require('./models/mobile.model')
 const { getAllTVs,getTVbyBrand} = require('./models/tv.model');
-const {addUser}=require('./models/signup.model')
+const {addUser}=require('./models/signup.model');
+const {addToCart,getCart}=require('./models/addtoCart.model');
 async function startServer() {
   console.log('Starting server...');
-  await mongoConnect();
+  //await mongoConnect();
 
-  mongoose.connection.once('open', () => {
+  /*mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
-  });
+  }); */
 
 
   try {
@@ -25,12 +26,13 @@ async function startServer() {
     // const cameras = await getCamerabyBrand("Canon");
     // console.log('Cameras:', cameras); // Verify the fetched data
 
-    //  console.log('Fetching laptops...');
-    // const laptops = await getLaptopbyBrand("Apple");
-    // console.log('Laptops:', laptops); // Verify the fetched data
+     console.log('Fetching laptops...');
+    //const laptops = await getAllLaptops();
+    //console.log('Laptops:', laptops); // Verify the fetched data
 
-     console.log('Adding user');
-     addUser('Aadil812','Aadil Mohamed','aadilharis812@gmail.com','aadil112233');
+    console.log("Getting cart details");
+    const cart=await getCart(12);
+    console.log(cart);
   } catch (error) {
     console.error('Error fetching cameras:', error);
   }
