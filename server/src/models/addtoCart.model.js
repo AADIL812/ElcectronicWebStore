@@ -1,67 +1,6 @@
 const { MongoClient } = require('mongodb');
 const mongo_url = "mongodb+srv://Aadil:1234@laptop.ahrgz.mongodb.net/?retryWrites=true&w=majority&appName=Laptop";
 
-async function addToCart(prod_id, qty, price, user_id, prod_name, prod_brand) {
-    const client = new MongoClient(mongo_url);
-
-    try {
-        await client.connect();
-
-        const db = client.db('ELectronic-webstore');
-        const collection = db.collection('Cart');
-
-        // Check if the cart exists for the user
-        let cart = await collection.findOne({ user: user_id });
-
-        if (cart) {
-            // Find the product in the cart
-            const itemIndex = cart.items.findIndex(item => item.prod_id.toString() === prod_id);
-
-            if (itemIndex > -1) {
-                // Update the quantity if product exists
-                cart.items[itemIndex].quantity += qty;
-            } else {
-                // Add new item to the cart
-                cart.items.push({
-                    prod_id: prod_id,
-                    quantity: qty,
-                    brand: prod_brand,
-                    price: price,
-                    name: prod_name,
-                });
-            }
-
-            // Update the cart in the database
-            await collection.updateOne({ user: user_id }, { $set: { items: cart.items } });
-        } else {
-            // Create a new cart for the user
-            const newCart = {
-                user: user_id,
-                items: [
-                    {
-                        prod_id: prod_id,
-                        quantity: qty,
-                        brand: prod_brand,
-                        price: price,
-                        name: prod_name,
-                    },
-                ],
-            };
-
-            await collection.insertOne(newCart);
-            return newCart;
-        }
-
-        console.log("Cart updated successfully.");
-        return cart;
-    } catch (error) {
-        console.error("Error updating the cart:", error);
-    } finally {
-        // Ensure the client connection is closed
-        await client.close();
-    }
-}
-
 async function getCart(userid)
 {
     const client=new MongoClient(mongo_url);
@@ -77,4 +16,97 @@ async function getCart(userid)
         await client.close();
     }
 }
-module.exports={addToCart,getCart};
+
+
+async function increaseQty(userid,prod_id,prod_brand,prod_name,price)
+{
+    const client=new MongoClient(mongo_url);
+    try{
+        await client.connect();
+        const db=client.db('ELectronic-webstore');
+        const collection=db.collection('Cart');
+        const cart=await collection.findOne({user:userid});
+      console.log(cart);
+        if (cart) {
+            const itemindex=cart.items.findIndex(item=>item.prod_id.toString()==prod_id); 
+            console.log(itemindex);
+            if (itemindex>-1)
+            {
+                cart.items[itemindex].quantity=cart.items[itemindex].quantity+1;
+                console.log( cart.items[itemindex].quantity);
+            }
+            else
+            {
+                cart.items.push({
+                    prod_id: prod_id,
+                    quantity: 1,
+                    brand: prod_brand,
+                    price: price,
+                    name: prod_name,
+                });
+            }
+            await collection.updateOne({user:userid},{$set:{items:cart.items}});
+            return cart;
+        }else{
+            const newCart = {
+                user: userid,
+                items: [
+                    {
+                        prod_id: prod_id,
+                        quantity: 1,
+                        brand: prod_brand,
+                        price: price,
+                        name: prod_name,
+                    },
+                ],
+            };
+            console.log(newCart);
+            await collection.insertOne(newCart);
+            return newCart;
+
+        }
+    }catch(error)
+    {
+        console.log("Error fetching details");
+    }finally{
+        await client.close();
+    }
+}
+
+
+async function decreaseQty(userid,prod_id)
+{
+    const client=new MongoClient(mongo_url);
+    try{
+       
+        await client.connect();
+        console.log('Connected to mongo');
+        const db=client.db('ELectronic-webstore');
+        const collection=db.collection('Cart');
+        const cart =await collection.findOne({user:userid});
+        console.log(cart);
+        if (cart){
+            const index=cart.items.findIndex(item=>item.prod_id.toString()==prod_id);
+            if (index>-1)
+            {
+                cart.items[index].quantity=cart.items[index].quantity-1;
+                if (cart.items[index].quantity==0){
+                    cart.items.splice(index,1);
+                    return cart;
+                }
+            }
+            else{
+                return null;
+                console.log(' Not possible');
+            }
+            await collection.updateOne({user:userid},{$set:{items:cart.items}});
+        }else{
+            return null;
+        }
+    }catch(error){
+        console.log('Error reducing count');
+    }finally{
+        await client.close();
+    }
+}
+module.exports={getCart,increaseQty,decreaseQty};
