@@ -6,6 +6,7 @@ const mongo_url= "mongodb+srv://Aadil:1234@laptop.ahrgz.mongodb.net/?retryWrites
 async function getAllLaptops(){
     const client=new MongoClient(mongo_url);
     await client.connect()
+    console.log('Getalllaptops function called');
     const database=client.db('ELectronic-webstore');
     const collection=database.collection('Laptop');
     const cameras=await collection.find({}).toArray();
