@@ -16,7 +16,7 @@ async function httpdecreaseQty(req,res){
     try{
         const cart=await decreaseQty(user_id,prod_id);
         console.log(cart);
-        if (cart){
+        if (cart!=null){
             res.status(200).json({msg:"Product count decreased",cart});
         }else{
             res.status(500).json({msg:"Error reducing"});

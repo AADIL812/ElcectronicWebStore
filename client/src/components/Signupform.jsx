@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { userContext } from "../Userprovider";
 
 const Signupform = () => {
   const [name, setName] = useState("");
@@ -7,15 +8,49 @@ const Signupform = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
 
-  const handleSubmit = (e) => {
-    console.log("Submit button pressed");
-    e.preventDefault();
+  // Consume userContext
+  const { setUser } = useContext(userContext);
 
-    // POST request to the signup API
-    axios
-      .post("http://localhost:5000/signup", { name, userid, email, pwd })
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent page refresh
+
+    try {
+      // Send signup request to backend
+      const response = await axios.post("http://localhost:5000/signup", {
+        name,
+        userid,
+        email,
+        pwd,
+      });
+
+      if (response.status === 200) {
+        console.log("Signup successful:", response.data);
+
+        // Update user context
+        setUser({
+          userid: response.data.user.UserId,
+          username: response.data.user.Name,
+        });
+
+        alert("User successfully signed up!");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+
+      if (error.response) {
+        const status = error.response.status;
+
+        if (status === 400) {
+          alert("Bad request. Please check your inputs.");
+        } else if (status === 409) {
+          alert("User already exists. Please choose another User ID.");
+        } else {
+          alert("An error occurred. Please try again later.");
+        }
+      } else {
+        alert("Unable to connect to the server.");
+      }
+    }
   };
 
   return (
@@ -26,8 +61,10 @@ const Signupform = () => {
           type="text"
           className="form-control"
           id="name"
-          placeholder="Enter name"
+          value={name} // Controlled input
           onChange={(e) => setName(e.target.value)}
+          placeholder="Enter name"
+          required
         />
       </div>
 
@@ -37,8 +74,10 @@ const Signupform = () => {
           type="text"
           className="form-control"
           id="userid"
-          placeholder="Enter userid"
+          value={userid} // Controlled input
           onChange={(e) => setUserid(e.target.value)}
+          placeholder="Enter userid"
+          required
         />
       </div>
 
@@ -48,8 +87,10 @@ const Signupform = () => {
           type="email"
           className="form-control"
           id="exampleInputEmail1"
-          placeholder="Enter email"
+          value={email} // Controlled input
           onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
+          required
         />
       </div>
 
@@ -59,8 +100,10 @@ const Signupform = () => {
           type="password"
           className="form-control"
           id="exampleInputPassword1"
-          placeholder="Password"
+          value={pwd} // Controlled input
           onChange={(e) => setPwd(e.target.value)}
+          placeholder="Password"
+          required
         />
       </div>
 

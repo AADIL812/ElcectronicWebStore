@@ -26,7 +26,7 @@ async function increaseQty(userid,prod_id,prod_brand,prod_name,price)
         const db=client.db('ELectronic-webstore');
         const collection=db.collection('Cart');
         const cart=await collection.findOne({user:userid});
-      console.log(cart);
+      //console.log(cart);
         if (cart) {
             const itemindex=cart.items.findIndex(item=>item.prod_id.toString()==prod_id); 
             console.log(itemindex);
@@ -60,7 +60,7 @@ async function increaseQty(userid,prod_id,prod_brand,prod_name,price)
                     },
                 ],
             };
-            console.log(newCart);
+          //  console.log(newCart);
             await collection.insertOne(newCart);
             return newCart;
 
@@ -84,7 +84,7 @@ async function decreaseQty(userid,prod_id)
         const db=client.db('ELectronic-webstore');
         const collection=db.collection('Cart');
         const cart =await collection.findOne({user:userid});
-        console.log(cart);
+        //console.log(cart);
         if (cart){
             const index=cart.items.findIndex(item=>item.prod_id.toString()==prod_id);
             if (index>-1)

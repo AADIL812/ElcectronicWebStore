@@ -90,6 +90,7 @@ const Camera = () => {
                   model={camera.Model}
                   brand={brand}
                   price={camera.Price}
+                  prodid={camera._id}
                 />
               );
             })}

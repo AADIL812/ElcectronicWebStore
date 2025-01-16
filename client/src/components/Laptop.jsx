@@ -89,6 +89,7 @@ const Laptop = () => {
                   model={laptop.Product}
                   brand={laptop.Company}
                   price={laptop["Price (Euro)"]} // Accessing price with spaces
+                  prodid={laptop._id}
                 />
               );
             })}

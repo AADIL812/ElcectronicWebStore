@@ -89,6 +89,7 @@ const Mobile = () => {
                   model={mobile.phone_name}
                   brand={mobile.brand}
                   price={mobile["price(USD)"]}
+                  prodid={mobile._id}
                 />
               );
             })}

@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
+import { IoIosAddCircle } from "react-icons/io";
+import { FaMinusCircle } from "react-icons/fa";
+import {getCart,increaseQty,decreaseQty} from "./Addtocart"
+import { userContext } from "../Userprovider"; // Import userContext
+import { useState } from "react";
+const ItemCard = ({ model, brand, price,prodid }) => {
+  const {user}=useContext(userContext);
+  const [qty,setqty ]=useState(0);
 
-const ItemCard = ({ model, brand, price }) => {
+  async function addele(userid,prodid,prod_brand,prod_name,price)
+  {
+    if (user==null)
+    {
+      console.log('Not logged in');
+      window.alert('Please login to add item to cart');
+    }
+    setqty(qty+1);
+     await increaseQty(userid,prodid,prod_brand,prod_name,price);
+     
+  }
+  async function delEle(userid,prodid)
+  {
+    if (user==null)
+      {
+        console.log('Not logged in');
+        window.alert('Please login to do any operations on cart');
+      }
+      setqty(qty-1);
+    await decreaseQty(userid,prodid);
+    
+  }
   return (
     <div className="item-card">
       <h3>Model: {model}</h3>
       <p>Brand: {brand}</p>
       <p>Price: ${price}</p>
-
+      <div>
+      <IoIosAddCircle onClick={()=>addele(user.userid,prodid,brand,model,price)} ></IoIosAddCircle>
+      <div>
+        {qty}
+      </div>
+      <FaMinusCircle onClick={()=>delEle(user.userid,prodid)}></FaMinusCircle>
+      </div>
       <style jsx>{`
         /* Styling for each ItemCard component */
         .item-card {

@@ -11,7 +11,7 @@ const { getAllLaptops,getLaptopbyBrand ,getLaptopsByBudget} = require('./models/
 const {getAllMobiles,getMobilebyBrand}=require('./models/mobile.model')
 const { getAllTVs,getTVbyBrand} = require('./models/tv.model');
 const {addUser}=require('./models/signup.model');
-const {increaseQty,addToCart,getCart,decreaseQty}  = require('./models/addtoCart.model')
+const {increaseQty,getCart,decreaseQty}  = require('./models/addtoCart.model')
 async function startServer() {
   console.log('Starting server...');
   //await mongoConnect();
@@ -30,8 +30,8 @@ async function startServer() {
     //const laptops = await getAllLaptops();
     //console.log('Laptops:', laptops); // Verify the fetched data
 
-  const cart=await getCart(13);
-  console.log(cart);
+  //const cart=await getCart(13);
+  //console.log(cart);
   } catch (error) {
     console.error('Error fetching cameras:', error);
   }

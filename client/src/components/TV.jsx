@@ -89,6 +89,7 @@ const TV = () => {
                   model={tv.Resolution}
                   brand={tv.Brand}
                   price={tv["Selling Price"]}
+                  prodid={tv._id}
                 />
               );
             })}
