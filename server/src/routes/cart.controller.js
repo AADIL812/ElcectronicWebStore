@@ -29,7 +29,6 @@ async function httpGetCart(req, res) {
     // Use req.params or req.query for a GET request to get the user ID
     let { userid } = req.params; // Assuming you're using route parameters
     console.log(userid);
-    userid=Number(userid);
     console.log(typeof(userid));
     try {
         // Call getCart function with the user ID

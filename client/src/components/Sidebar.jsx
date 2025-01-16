@@ -66,6 +66,14 @@ const Sidebar = () => {
             Television
           </Link>
         </li>
+        <li>
+          <Link to="/cart" className="nav-link text-white">
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#people-circle"></use>
+            </svg>
+            CART
+          </Link>
+        </li>
       </ul>
       <hr />
       <div className="dropdown">

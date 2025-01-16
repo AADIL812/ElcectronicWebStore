@@ -31,3 +31,5 @@ export async function decreaseQty(user_id,prod_id){
   }
   
 }
+
+getCart("Afreen12");

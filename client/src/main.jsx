@@ -11,8 +11,9 @@ import Signin from "./components/Signin.jsx";
 import Signup from "./components/Signup.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Userprovider from "./Userprovider.jsx";
-
+import Cart from "./components/Cart.jsx";
 const router = createBrowserRouter([
+  
   {
     path: "/",
     element: <App />, // App will act as a layout with Outlet
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "/tv", element: <TV /> },
       { path: "/signin", element: <Signin /> },
       { path: "/signup", element: <Signup /> },
+      {path:"/cart",element:<Cart/>}
     ],
   },
 ]);

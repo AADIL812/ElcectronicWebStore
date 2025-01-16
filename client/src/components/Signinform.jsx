@@ -8,7 +8,7 @@ const Signinform = () => {
 
   // Consume userContext
   const { user, setUser } = useContext(userContext);
-
+  //const {cart,setCart}=useContext(userContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
