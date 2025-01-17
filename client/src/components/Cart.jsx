@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { getCart } from './Addtocart'; // Importing the getCart function
+import { getCart, increaseQty, decreaseQty } from './Addtocart'; // Importing the getCart function
 import { userContext } from '../Userprovider'; // Importing the userContext
 
 const Cart = () => {
@@ -26,6 +26,17 @@ const Cart = () => {
     }
   };
 
+  // Update quantity for a specific item
+  const updateQuantity = (prod_id, change) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.prod_id === prod_id
+          ? { ...item, quantity: item.quantity + change }
+          : item
+      )
+    );
+  };
+
   return (
     <div>
       <h2>USER CART</h2>
@@ -41,7 +52,27 @@ const Cart = () => {
               {cart.map((item, index) => (
                 <li key={index}>
                   <h3>{item.name}</h3>
-                  <p>Quantity: {item.quantity}</p>
+                  <p>
+                    Quantity: {item.quantity}
+                    <button
+                      onClick={() => {
+                        updateQuantity(item.prod_id, 1);
+                        increaseQty(userid, item.prod_id); // Call increaseQty API
+                      }}
+                    >
+                      +
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (item.quantity >= 1) {
+                          updateQuantity(item.prod_id, -1);
+                          decreaseQty(userid, item.prod_id); // Call decreaseQty API
+                        }
+                      }}
+                    >
+                      -
+                    </button>
+                  </p>
                   <p>Price: {item.price}</p>
                 </li>
               ))}

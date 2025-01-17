@@ -8,7 +8,7 @@ const ItemCard = ({ model, brand, price,prodid }) => {
   const {user}=useContext(userContext);
   const [qty,setqty ]=useState(0);
 
-  async function addele(userid,prodid,prod_brand,prod_name,price)
+async function addele(userid,prodid,prod_brand,prod_name,price)
   {
     if (user==null)
     {

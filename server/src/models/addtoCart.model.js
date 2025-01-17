@@ -94,6 +94,7 @@ async function decreaseQty(userid,prod_id)
                     cart.items.splice(index,1);
                     return cart;
                 }
+                await collection.updateOne({ user: userid }, { $set: { items: cart.items } });
             }
             else{
                 return null;
