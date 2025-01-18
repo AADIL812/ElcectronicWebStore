@@ -11,7 +11,7 @@ const Camera = () => {
   const fetchAllCameras = async () => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get("http://localhost:5000/camera");
+      const response = await axios.get("https://electronic-webstore.vercel.app/camera");
       setCameras(response.data);
     } catch (error) {
       console.error("Error fetching cameras:", error);
@@ -23,7 +23,7 @@ const Camera = () => {
   const fetchCamerasByBrand = async (brand) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`http://localhost:5000/camera/brand/${brand}`);
+      const response = await axios.get(`https://electronic-webstore.vercel.app/camera/brand/${brand}`);
       setCameras(response.data);
     } catch (error) {
       console.error("Error fetching cameras by brand:", error);
@@ -35,7 +35,7 @@ const Camera = () => {
   const fetchCamerasByBudget = async (lowerPrice, upperPrice) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`http://localhost:5000/camera/budget`, {
+      const response = await axios.get(`https://electronic-webstore.vercel.app/camera/budget`, {
         params: { lowerPrice, upperPrice },
       });
       setCameras(response.data);

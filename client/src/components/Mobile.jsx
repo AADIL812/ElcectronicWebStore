@@ -11,7 +11,7 @@ const Mobile = () => {
   const fetchAllMobiles = async () => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get("http://localhost:5000/phone");
+      const response = await axios.get("https://electronic-webstore.vercel.app/phone");
       setMobiles(response.data);
     } catch (error) {
       console.error("Error fetching mobiles:", error);
@@ -23,7 +23,7 @@ const Mobile = () => {
   const fetchMobilesByBrand = async (brand) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`http://localhost:5000/phone/brand/${brand}`);
+      const response = await axios.get(`https://electronic-webstore.vercel.app/phone/brand/${brand}`);
       setMobiles(response.data);
     } catch (error) {
       console.error("Error fetching mobiles by brand:", error);
@@ -35,7 +35,7 @@ const Mobile = () => {
   const fetchMobilesByBudget = async (lowerPrice, upperPrice) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`http://localhost:5000/phone/budget`, {
+      const response = await axios.get(`https://electronic-webstore.vercel.app/phone/budget`, {
         params: { lowerPrice, upperPrice },
       });
       setMobiles(response.data);

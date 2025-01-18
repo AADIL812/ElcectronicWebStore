@@ -11,7 +11,7 @@ const TV = () => {
   const fetchAllTVs = async () => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get("http://localhost:5000/tv");
+      const response = await axios.get("https://electronic-webstore.vercel.app/tv");
       setTVs(response.data);
     } catch (error) {
       console.error("Error fetching TVs:", error);
@@ -23,7 +23,7 @@ const TV = () => {
   const fetchTVsByBrand = async (brand) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`http://localhost:5000/tv/brand/${brand}`);
+      const response = await axios.get(`https://electronic-webstore.vercel.app/tv/brand/${brand}`);
       setTVs(response.data);
     } catch (error) {
       console.error("Error fetching TVs by brand:", error);
@@ -35,7 +35,7 @@ const TV = () => {
   const fetchTVsByBudget = async (lowerPrice, upperPrice) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`http://localhost:5000/tv/budget`, {
+      const response = await axios.get(`https://electronic-webstore.vercel.app/tv/budget`, {
         params: { lowerPrice, upperPrice },
       });
       setTVs(response.data);

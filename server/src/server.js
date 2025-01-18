@@ -1,6 +1,6 @@
-const http = require("http");
+const https= require("http");
 const app = require("./app");
-const server = http.createServer(app);
+const server = https.createServer(app);
 const port = 5000;
 
 const mongoose = require('mongoose');
