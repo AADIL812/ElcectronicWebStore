@@ -29,5 +29,4 @@ const sendEmail = async (to, subject, text) => {
   }
 };
 
-sendEmail("haris.savitha@gmail.com","Aadil","Hello I am Aadil");
 module.exports={sendEmail};
