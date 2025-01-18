@@ -4,7 +4,7 @@ const app = exress();
 const {api}=require('./routes/api');
 
 const corsOptions = {
-    origin: "http://localhost:3000",
+    origin: "https://elcectronic-web-storefrontend.vercel.app/",
     optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
   };
 
