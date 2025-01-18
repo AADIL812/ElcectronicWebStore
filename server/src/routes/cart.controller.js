@@ -1,4 +1,4 @@
-const { getCart,increaseQty,decreaseQty}= require('../models/addtoCart.model');
+const { getCart,increaseQty,decreaseQty,deleteCart }=  require('../models/addtoCart.model')
 
 async function httpincreaseQty(req,res){
     const {user_id,prod_id,prod_brand,prod_name,price}=req.body;
@@ -43,5 +43,13 @@ async function httpGetCart(req, res) {
         res.status(500).json({ msg: "Failed to get cart details", error: error.message });
     }
 }
-
-module.exports = { httpincreaseQty, httpGetCart ,httpdecreaseQty};
+async function httpDeleteCart(req,res){
+    let {userid}=req.params;
+    console.log(userid);
+    try{
+        await deleteCart(userid);
+    }catch(error){
+        console.log("Failed to delete cart");
+    }
+}
+module.exports = { httpincreaseQty, httpGetCart ,httpdecreaseQty,httpDeleteCart};

@@ -110,4 +110,23 @@ async function decreaseQty(userid,prod_id)
         await client.close();
     }
 }
-module.exports={getCart,increaseQty,decreaseQty};
+
+
+async function deleteCart(userid)
+{
+    const client=new MongoClient(mongo_url);
+    try{
+        await client.connect();
+        const db=client.db('ELectronic-webstore');
+        const collection=db.collection('Cart');
+        await collection.deleteOne({user:userid});
+    }catch(error)
+    {
+        console.log("Error deleting cart");
+
+    }finally{
+        await client.close();
+    }
+}
+deleteCart("perfect65");
+module.exports={getCart,increaseQty,decreaseQty,deleteCart};

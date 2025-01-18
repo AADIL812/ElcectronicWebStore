@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { getCart, increaseQty, decreaseQty } from './Addtocart'; // Importing the getCart function
+import { getCart, increaseQty, decreaseQty, deleteCart } from './Addtocart'; // Importing the deleteCart function
 import { userContext } from '../Userprovider'; // Importing the userContext
 
 const Cart = () => {
@@ -26,6 +26,22 @@ const Cart = () => {
     }
   };
 
+  // Function to delete the cart
+  const handleDeleteCart = async () => {
+    if (userid) {
+      try {
+        setLoading(true); // Start loading
+        await deleteCart(userid); // Call the deleteCart function
+        setCart([]); // Clear the cart in the frontend
+        console.log('Cart deleted successfully');
+      } catch (error) {
+        console.error('Error deleting cart:', error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    }
+  };
+
   // Update quantity for a specific item
   const updateQuantity = (prod_id, change) => {
     setCart((prevCart) =>
@@ -43,6 +59,12 @@ const Cart = () => {
       {userid ? (
         <div>
           <button onClick={fetchCart}>Fetch Cart</button> {/* Button to trigger cart fetching */}
+          <button 
+            onClick={handleDeleteCart} 
+            style={{ marginLeft: '10px', color: 'red' }}
+          >
+            Delete Cart
+          </button> {/* Button to delete the entire cart */}
           {loading ? (
             <h2>Loading...</h2> // Show loading indicator while fetching
           ) : cart.length === 0 ? (

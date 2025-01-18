@@ -32,4 +32,11 @@ export async function decreaseQty(user_id,prod_id){
   
 }
 
+export async function deleteCart(userid){
+  const api=`http://localhost:5000/cart/delete/${userid}`;
+  const response=axios.delete(api);
+}
+
 getCart("Afreen12");
+
+deleteCart("Afreen12");
