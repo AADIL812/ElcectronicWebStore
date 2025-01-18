@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { getCart, increaseQty, decreaseQty, deleteCart } from './Addtocart'; // Importing the deleteCart function
 import { userContext } from '../Userprovider'; // Importing the userContext
+import axios from 'axios';
 
 const Cart = () => {
   const [cart, setCart] = useState([]); // State to hold the fetched cart data
@@ -15,8 +16,9 @@ const Cart = () => {
         setLoading(true); // Start loading
         console.log('Fetching cart...');
         const userCart = await getCart(userid); // Fetch the cart using the `getCart` function
-        console.log('Cart data:', userCart);
+        //console.log('Cart data:', userCart);
         const cartItems = userCart?.data?.items || []; // Adjust based on actual data structure
+        console.log(user);
         setCart(cartItems); // Update the cart state with the fetched items
       } catch (error) {
         console.error('Error fetching cart:', error); // Log errors if any
@@ -42,6 +44,29 @@ const Cart = () => {
     }
   };
 
+  // Function to send email with cart details
+  const sendCartEmail = async () => {
+    console.log(cart);
+    if (user?.email && cart.length > 0) {
+      console.log(cart);
+      const cartDetails = cart.map(item => `${item.name} - Quantity: ${item.quantity} - Price: ${item.price}`).join('\n');
+      const emailData = {
+        to: user.email,
+        subject: 'Your Cart Details',
+        text: `Here are the details of your cart:\n\n${cartDetails}`,
+      };
+
+      try {
+        await axios.post('http://localhost:5000/email', emailData); // Send the email
+        alert('Cart details sent to your email!');
+      } catch (error) {
+        alert('Failed to send email');
+      }
+    } else {
+      alert('Cart is empty or email not found');
+    }
+  };
+
   // Update quantity for a specific item
   const updateQuantity = (prod_id, change) => {
     setCart((prevCart) =>
@@ -59,12 +84,12 @@ const Cart = () => {
       {userid ? (
         <div>
           <button onClick={fetchCart}>Fetch Cart</button> {/* Button to trigger cart fetching */}
-          <button 
-            onClick={handleDeleteCart} 
-            style={{ marginLeft: '10px', color: 'red' }}
-          >
+          <button onClick={handleDeleteCart} style={{ marginLeft: '10px', color: 'red' }}>
             Delete Cart
           </button> {/* Button to delete the entire cart */}
+          <button onClick={sendCartEmail} style={{ marginLeft: '10px' }}>
+            Send Cart via Email
+          </button> {/* Button to send the cart email */}
           {loading ? (
             <h2>Loading...</h2> // Show loading indicator while fetching
           ) : cart.length === 0 ? (
@@ -111,3 +136,4 @@ const Cart = () => {
 };
 
 export default Cart;
+

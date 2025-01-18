@@ -20,7 +20,7 @@ const Signinform = () => {
 
       if (response.status === 200) {
         console.log(response);
-        setUser({ userid:response.data.user.UserId,username:response.data.user.Name});
+        setUser({ userid:response.data.user.UserId,username:response.data.user.Name,email:response.data.user.email});
         alert("Login successful!");
       }
     } catch (error) {

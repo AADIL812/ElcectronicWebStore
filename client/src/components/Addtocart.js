@@ -37,6 +37,3 @@ export async function deleteCart(userid){
   const response=axios.delete(api);
 }
 
-getCart("Afreen12");
-
-deleteCart("Afreen12");
