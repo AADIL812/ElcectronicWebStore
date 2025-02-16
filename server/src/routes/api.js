@@ -17,4 +17,7 @@ api.use('/signup',signupRouter);
 api.use('/login',signinRouter);
 api.use('/cart',cartRouter);
 api.use('/email',emailRouter);
+api.use('/',(req,res)=>{
+    res.send("API is working");
+});
 module.exports={api};
