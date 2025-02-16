@@ -11,4 +11,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(exress.json());
 app.use('/',api);
+app.use('/',(req,res)=>{
+  res.send("API is working");
+});
 module.exports = app;
