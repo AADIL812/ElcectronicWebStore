@@ -57,7 +57,7 @@ const Cart = () => {
       };
 
       try {
-        await axios.post('https://electronic-webstore.vercel.app/email', emailData); // Send the email
+        await axios.post('http://localhost:5000/email', emailData); // Send the email
         alert('Cart details sent to your email!');
       } catch (error) {
         alert('Failed to send email');

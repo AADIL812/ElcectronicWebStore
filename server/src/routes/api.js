@@ -8,9 +8,7 @@ const {cartRouter}=require('./cart.router')
 const {emailRouter}=require('./email.router')
 const express=require('express');
 const api=express.Router();
-api.use('/',(req,res)=>{
-    res.json("Hello");
-});
+
 api.use('/camera',cameraController);
 api.use('/laptop',laptopRouter);
 api.use('/phone',mobileRouter);

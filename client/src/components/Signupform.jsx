@@ -10,13 +10,13 @@ const Signupform = () => {
 
   // Consume userContext
   const { setUser } = useContext(userContext);
-
+  const api="http://localhost:5000/signup";
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page refresh
 
     try {
       // Send signup request to backend
-      const response = await axios.post("https://electronic-webstore.vercel.app/signup", {
+      const response = await axios.post(api, {
         name,
         userid,
         email,

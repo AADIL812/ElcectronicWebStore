@@ -27,6 +27,7 @@ async function httpdecreaseQty(req,res){
 }
 async function httpGetCart(req, res) {
     // Use req.params or req.query for a GET request to get the user ID
+    console.log("Get cart function called");
     let { userid } = req.params; // Assuming you're using route parameters
     console.log(userid);
     console.log(typeof(userid));

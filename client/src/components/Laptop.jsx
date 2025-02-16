@@ -7,11 +7,11 @@ import axios from "axios";
 const Laptop = () => {
   const [laptops, setLaptops] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading
-
+  const api='http://localhost:5000/laptop';
   const fetchAllLaptops = async () => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get("https://electronic-webstore.vercel.app/laptop");
+      const response = await axios.get(api);
       setLaptops(response.data);
     } catch (error) {
       console.error("Error fetching laptops:", error);
@@ -23,7 +23,7 @@ const Laptop = () => {
   const fetchLaptopsByBrand = async (brand) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`https://electronic-webstore.vercel.app/laptop/brand/${brand}`);
+      const response = await axios.get(api+`/brand/${brand}`);
       setLaptops(response.data);
     } catch (error) {
       console.error("Error fetching laptops by brand:", error);
@@ -35,7 +35,7 @@ const Laptop = () => {
   const fetchLaptopsByBudget = async (lowerPrice, upperPrice) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`https://electronic-webstore.vercel.app/laptop/budget`, {
+      const response = await axios.get(api+'/price', {
         params: { lowerPrice, upperPrice },
       });
       setLaptops(response.data);

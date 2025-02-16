@@ -5,7 +5,7 @@ import { userContext } from "../Userprovider"; // Import the context
 const Signinform = () => {
   const [userid, setUserid] = useState("");
   const [password, setPassword] = useState("");
-
+  const api = "http://localhost:5000/login";
   // Consume userContext
   const { user, setUser } = useContext(userContext);
   //const {cart,setCart}=useContext(userContext);
@@ -13,7 +13,7 @@ const Signinform = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://electronic-webstore.vercel.app/login", {
+      const response = await axios.post(api, {
         userid,
         password,
       });

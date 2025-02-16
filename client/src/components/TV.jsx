@@ -7,11 +7,11 @@ import axios from "axios";
 const TV = () => {
   const [tvs, setTVs] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading
-
+  const api='http://localhost:5000/tv';
   const fetchAllTVs = async () => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get("https://electronic-webstore.vercel.app/tv");
+      const response = await axios.get(api);
       setTVs(response.data);
     } catch (error) {
       console.error("Error fetching TVs:", error);
@@ -23,7 +23,7 @@ const TV = () => {
   const fetchTVsByBrand = async (brand) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`https://electronic-webstore.vercel.app/tv/brand/${brand}`);
+      const response = await axios.get(api+`/brand/${brand}`);
       setTVs(response.data);
     } catch (error) {
       console.error("Error fetching TVs by brand:", error);
@@ -35,7 +35,7 @@ const TV = () => {
   const fetchTVsByBudget = async (lowerPrice, upperPrice) => {
     try {
       setLoading(true); // Show loader
-      const response = await axios.get(`https://electronic-webstore.vercel.app/tv/budget`, {
+      const response = await axios.get(api+'/budget', {
         params: { lowerPrice, upperPrice },
       });
       setTVs(response.data);
